@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     // domains: ["gateway.pinata.cloud"],
+    staticPageGenerationTimeout: 1000,
     remotePatterns: [
       {
         protocol: "https",
