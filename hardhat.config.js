@@ -3,7 +3,7 @@ require("@nomiclabs/hardhat-ethers");
 require("@nomiclabs/hardhat-etherscan");
 
 module.exports = {
-  defaultNetwork: "sphinx",
+  defaultNetwork: "okx",
   networks: {
     hardhat: {},
     polygon_mumbai: {
