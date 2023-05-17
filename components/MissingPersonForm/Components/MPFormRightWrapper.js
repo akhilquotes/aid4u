@@ -4,6 +4,8 @@ import { useState, useContext } from "react";
 import { toast } from "react-toastify";
 import { TailSpin } from "react-loader-spinner";
 import axios from "axios";
+import { upload } from "@spheron/browser-upload";
+import { uuid } from "uuidv4";
 
 const MPFormRightWrapper = () => {
   const Handler = useContext(MPFormState);
@@ -15,7 +17,10 @@ const MPFormRightWrapper = () => {
     debugger;
     e.preventDefault();
     setUploadLoading(true);
-
+    const response = await fetch(
+      "/api/getSpheronUploadToken?bucket=aid4ustorage-" + uuid()
+    );
+    const responseJson = await response.json();
     if (Handler.form.additionalInfo !== "") {
       try {
         var data = JSON.stringify({
@@ -41,27 +46,16 @@ const MPFormRightWrapper = () => {
         toast.warn(`Error Uploading Story`);
       }
     }
-
     if (Handler.photo !== null) {
       try {
-        const formData = new FormData();
-        formData.append("file", Handler.photo);
-
-        const resFile = await axios({
-          method: "post",
-          url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
-          data: formData,
-          headers: {
-            pinata_api_key: `${process.env.NEXT_PUBLIC_PINATA_API_KEY}`,
-            pinata_secret_api_key: `${process.env.NEXT_PUBLIC_PINATA_API_SECRET}`,
-            "Content-Type": "multipart/form-data",
-          },
+        const uploadResult = await upload([Handler.photo], {
+          token: responseJson.uploadToken,
         });
-
-        const ImgHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
-        Handler.setPhotoUrl(ImgHash);
+        Handler.setPhotoUrl(
+          "https://" + uploadResult.dynamicLinks[0] + "/" + Handler.photo.name
+        );
       } catch (error) {
-        toast.warn(`Error Uploading Image`);
+        toast.warn(`Error Uploading image`);
       }
     }
 
@@ -97,7 +91,9 @@ const MPFormRightWrapper = () => {
           <TailSpin color="#fff" height={20} />
         </Button>
       ) : uploaded == false ? (
-        <Button onClick={uploadFiles}>Upload Files to IPFS</Button>
+        <Button onClick={uploadFiles}>
+          Upload Files to IPFS using Spheron
+        </Button>
       ) : (
         <Button style={{ cursor: "no-drop" }}>
           Files uploaded Sucessfully
