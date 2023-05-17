@@ -4,8 +4,6 @@ import { useState, useContext } from "react";
 import { toast } from "react-toastify";
 import { TailSpin } from "react-loader-spinner";
 import axios from "axios";
-import { upload } from "@spheron/browser-upload";
-import { uuid } from "uuidv4";
 
 const FormRightWrapper = () => {
   const Handler = useContext(FormState);
@@ -17,32 +15,53 @@ const FormRightWrapper = () => {
     debugger;
     e.preventDefault();
     setUploadLoading(true);
-    const response = await fetch(
-      "/api/getSpheronUploadToken?bucket=aid4ustorage-" + uuid()
-    );
-    const responseJson = await response.json();
+
     if (Handler.form.story !== "") {
       try {
-        var file = new File(
-          [JSON.stringify({ Description: Handler.form.story })],
-          Handler.form.campaignTitle + "_Desc.json",
-          { type: "text/json" }
-        );
-        const uploadResult = await upload([file, Handler.image], {
-          token: responseJson.uploadToken,
+        var data = JSON.stringify({
+          pinataMetadata: {
+            name: Handler.form.campaignTitle + "_Desc.json",
+          },
+          pinataContent: { Description: Handler.form.story },
         });
-        Handler.setStoryUrl(
-          "https://" +
-            uploadResult.dynamicLinks[0] +
-            "/" +
-            Handler.form.campaignTitle +
-            "_Desc.json"
-        );
-        Handler.setImageUrl(
-          "https://" + uploadResult.dynamicLinks[0] + "/" + Handler.image.name
-        );
+        const resFile = await axios({
+          method: "post",
+          url: "https://api.pinata.cloud/pinning/pinJSONToIPFS",
+          data: data,
+          headers: {
+            pinata_api_key: `${process.env.NEXT_PUBLIC_PINATA_API_KEY}`,
+            pinata_secret_api_key: `${process.env.NEXT_PUBLIC_PINATA_API_SECRET}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        const ImgHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
+        Handler.setStoryUrl(ImgHash);
       } catch (error) {
-        toast.warn(`Error Uploading files`);
+        toast.warn(`Error Uploading Story`);
+      }
+    }
+
+    if (Handler.image !== null) {
+      try {
+        const formData = new FormData();
+        formData.append("file", Handler.image);
+
+        const resFile = await axios({
+          method: "post",
+          url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
+          data: formData,
+          headers: {
+            pinata_api_key: `${process.env.NEXT_PUBLIC_PINATA_API_KEY}`,
+            pinata_secret_api_key: `${process.env.NEXT_PUBLIC_PINATA_API_SECRET}`,
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        const ImgHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
+        Handler.setImageUrl(ImgHash);
+      } catch (error) {
+        toast.warn(`Error Uploading Image`);
       }
     }
 
@@ -66,8 +85,6 @@ const FormRightWrapper = () => {
               <option>Cyclone</option>
               <option>Flood</option>
               <option>Earthquake</option>
-              <option>Tornado</option>
-              <option>Hurricane</option>
               <option>Other</option>
             </Select>
           </RowSecondInput>
@@ -88,9 +105,7 @@ const FormRightWrapper = () => {
           <TailSpin color="#fff" height={20} />
         </Button>
       ) : uploaded == false ? (
-        <Button onClick={uploadFiles}>
-          Upload Files to IPFS using Spheron
-        </Button>
+        <Button onClick={uploadFiles}>Upload Files to IPFS</Button>
       ) : (
         <Button style={{ cursor: "no-drop" }}>
           Files uploaded Sucessfully
