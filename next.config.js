@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  staticPageGenerationTimeout: 1000,
   images: {
     // domains: ["gateway.pinata.cloud"],
-    staticPageGenerationTimeout: 1000,
     remotePatterns: [
       {
         protocol: "https",
