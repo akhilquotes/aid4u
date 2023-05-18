@@ -46,8 +46,11 @@ export default function Detail({ Data, DonationsData }) {
       );
       fetch(Data.storyUrl)
         .then((res) => res.json())
-        .then((data) => (storyData = data.Description));
-      setStory(storyData);
+        .then((data) => {
+          storyData = data.Description;
+          console.log(data);
+          setStory(storyData);
+        });
     };
 
     Request();
