@@ -96,9 +96,8 @@ const Form = () => {
             ) : (
               <Address>
                 <h1>Registered Disaster and campaign started sucessfully!</h1>
-                <h1>{address}</h1>
-                <Link passHref href={"/" + address}>
-                  <Button>View Details</Button>
+                <Link passHref href={"/"}>
+                  <Button>View Campaigns</Button>
                 </Link>
               </Address>
             )
