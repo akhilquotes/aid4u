@@ -1,44 +1,8 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Users/mrudhulakatta/Desktop/Mrudhula/Hackathons/Web3athon/missingkids/missing-kids/contracts/Campaign.sol": {
-      "lastModificationDate": 1683100126742,
-      "contentHash": "831d6dbb1e3b94c702702cc4ffad2ddc",
-      "sourceName": "contracts/Campaign.sol",
-      "solcConfig": {
-        "version": "0.8.18",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">0.7.0 <=0.9.0"
-      ],
-      "artifacts": [
-        "Campaign",
-        "CampaignFactory"
-      ]
-    },
-    "/Users/mrudhulakatta/Desktop/Mrudhula/Hackathons/Web3athon/missing-kids/contracts/Campaign.sol": {
-      "lastModificationDate": 1683723036152,
+    "/Users/mrudhulakatta/Desktop/Mrudhula/Hackathons/Web3athon/OKTC/Aid4U/contracts/Campaign.sol": {
+      "lastModificationDate": 1684235129086,
       "contentHash": "c7f2f171b5a8a694678d3ef5bbaf26f6",
       "sourceName": "contracts/Campaign.sol",
       "solcConfig": {
