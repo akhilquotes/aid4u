@@ -56,6 +56,7 @@ const FormRightWrapper = () => {
             type: "text/json",
           }
         );
+        
         const uploadResult = await upload([file, Handler.image], {
           token: responseJson.uploadToken,
         });
