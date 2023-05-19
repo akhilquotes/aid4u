@@ -49,7 +49,14 @@ const FormRightWrapper = () => {
 
     if (Handler.form.image !== "") {
       try {
-        const uploadResult = await upload([Handler.image], {
+        var file = new File(
+          [JSON.stringify({ Description: Handler.form.story })],
+          Handler.form.campaignTitle + "_Desc.json",
+          {
+            type: "text/json",
+          }
+        );
+        const uploadResult = await upload([file, Handler.image], {
           token: responseJson.uploadToken,
         });
         Handler.setImageUrl(
