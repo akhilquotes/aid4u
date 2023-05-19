@@ -66,7 +66,6 @@ const Form = () => {
       );
 
       await campaignData.wait();
-
       setAddress(campaignData.to);
     }
   };
