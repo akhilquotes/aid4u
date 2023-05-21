@@ -1,38 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Problem:
 
-## Getting Started
+  Irrespective of the timing or location, the magnitude of natural disasters is enormous, demanding substantial time, energy, and resources to reconstruct affected communities. Throughout the occurrence and aftermath of such calamities, various entities including businesses, relief agencies, and non-governmental organizations work in conjunction with local, state, and national governments, as well as community residents, to coordinate and administer relief endeavors. These stakeholders frequently encounter diverse operational obstacles throughout the process of disaster management.
 
-First, run the development server:
+# Key Challenges faced are:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- Insufficient trust, transparency, and auditability, hindering the assurance that resources are utilized as intended.
+- Complicated registration procedures for volunteers, causing inconvenience and delays.
+- Inadequate coordination among organizations involved in the relief efforts.
+- Absence of a unified channel or streamlined process for donors and agencies to facilitate their contributions.
+- Lack of a proper system to track missing individuals during and after the disaster.
+- Incomplete or improper documentation of activities and transactions related to the relief operations.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Solution:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+We provide an integrated solution for Government agencies/ Donors/ Volunteers/ Users. Aid4U aims to solve mentioned challenges by
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- Establishing a unified and reliable ledger as a shared platform for collaboration and coordination among all stakeholders, including relief organizations, volunteers, and government agencies.
+- Implementing an efficient system to maintain comprehensive information about missing individuals and securely store any pertinent personally identifiable information (PII) documents. This allows agencies and users to easily trace and track progress in locating them.
+- Recording all donations collected for the crisis in an immutable ledger to ensure transparency, auditability, and prevent any potential misuse of funds or resources.
+- Facilitating anytime, anywhere access through smartphones, enabling individuals to record requests for help or engage in relevant communication conveniently.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+# Future Roadmap:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Add live update for missing people so that all users can track the status seamlessly
+- Provide incentives or certificates for volunteers to encourage the active participation
+- Enable donors to donate material(food, clothes…) in addition to funds and enter the supplies information in ledger to avoid misuse
 
-## Learn More
+# Testing Instructions: 
 
-To learn more about Next.js, take a look at the following resources:
+Navigate to https://aid4u.vercel.app/ to test application.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To run locally:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Download git repo 
+2. run `npm install`
+3. To deploy smart contract to OKT Chain using hardhat, run below command in terminal npx hardhat run scripts/deploy.js --network okx
+4. Replace the contract address in .env file with variable name NEXT_PUBLIC_CONTRACT_ADDRESS
+5. To view application locally, run below command in terminal npm run dev
+6. To test application Connect to OKT Chain using metamask wallet
