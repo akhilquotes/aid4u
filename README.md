@@ -28,7 +28,7 @@ We provide an integrated solution for Government agencies/ Donors/ Volunteers/ U
 
 # Testing Instructions: 
 
-Navigate to https://aid4u.vercel.app/ to test application.
+Navigate to http://rltp13v0lddkpa8j1aklfiod5g.ingress.palmito.duckdns.org/ to test application.
 
 To run locally:
 
