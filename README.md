@@ -30,7 +30,7 @@ We provide an integrated solution for Government agencies/ Donors/ Volunteers/ U
 
 Navigate to https://aid4u.vercel.app/ to test application.
 
-`We have deployed our app initially using Spheron Compute to below url http://rltp13v0lddkpa8j1aklfiod5g.ingress.palmito.duckdns.org/, but as free plan is valid for only 15 days, deployed the application using Vercel.`
+`We have deployed our app initially using Spheron Compute to below url http://rltp13v0lddkpa8j1aklfiod5g.ingress.palmito.duckdns.org/ recorded demo and uploaded in youtube, but as free plan is valid for only 15 days, deployed the application using Vercel.`
 
 To run locally:
 
