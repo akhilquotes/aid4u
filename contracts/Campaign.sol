@@ -2,6 +2,7 @@
 
 pragma solidity >0.7.0 <=0.9.0;
 
+// To store list of all campaigns stared when registering disasters
 contract CampaignFactory {
     address[] public deployedCampaigns;
     uint public campaignCount;
@@ -14,6 +15,7 @@ contract CampaignFactory {
         string category;
     }
 
+    //list of campaigns
     CampaignLocal[] public campaignList;
 
     event campaignCreated(
@@ -29,6 +31,7 @@ contract CampaignFactory {
         campaignCount = 0;
     }
 
+    //To start campaign for disaster by calling Campaign contract 
     function createCampaign(
         string memory campaignTitle,
         string memory imgURI,
@@ -63,6 +66,7 @@ contract CampaignFactory {
         );
     }
 
+    //returns list of all disasters
     function listCampaigns() public view returns (CampaignLocal[] memory) {
         CampaignLocal[] memory listCamp = new CampaignLocal[](campaignCount);
         for (uint i = 0; i < campaignCount; i++) {
@@ -73,7 +77,10 @@ contract CampaignFactory {
     }
 }
 
+//To start campaign to raise funds when registering disaster
 contract Campaign {
+
+    //To store details of missing person
     struct Person {
         uint personId;
         string firstName;
@@ -83,6 +90,8 @@ contract Campaign {
         string photoUrl;
         string additionInfoUrl;
     }
+    
+    //To store all donations made 
     struct Donation {
         address donar;
         uint amount;
@@ -128,6 +137,7 @@ contract Campaign {
         donationCount = 0;
     }
 
+    //To accept donations made for disaster
     function donate() public payable {
         owner.transfer(msg.value);
         receivedAmount += msg.value;
@@ -141,6 +151,7 @@ contract Campaign {
         emit donated(msg.sender, msg.value, block.timestamp);
     }
 
+    //To store all detaills of missing persons during disaster
     function addMissingPerson(
         string memory firstName,
         string memory lastName,
@@ -170,6 +181,7 @@ contract Campaign {
         );
     }
 
+    //To return list of all missing persons in disaster
     function listMissingPersons() public view returns (Person[] memory) {
         Person[] memory listPpl = new Person[](peopleCount);
         for (uint i = 0; i < peopleCount; i++) {
@@ -179,6 +191,7 @@ contract Campaign {
         return listPpl;
     }
 
+    //To retuns list of all donations made
     function listDonations() public view returns (Donation[] memory) {
         Donation[] memory listDonate = new Donation[](donationCount);
         for (uint i = 0; i < donationCount; i++) {
