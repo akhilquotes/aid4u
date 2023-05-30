@@ -30,6 +30,8 @@ We provide an integrated solution for Government agencies/ Donors/ Volunteers/ U
 
 Navigate to https://aid4u.vercel.app/ or http://rltp13v0lddkpa8j1aklfiod5g.ingress.palmito.duckdns.org/ to test application.
 
+Smart contract deployed on OKTC Testnet: https://www.okx.com/en-in/explorer/oktc-test/address/0xf30046a25F7199CcaDa2f3E5A23b14f04eBE8eF7
+
 `We have deployed our app initially using Spheron Compute to below url http://rltp13v0lddkpa8j1aklfiod5g.ingress.palmito.duckdns.org/ recorded demo and uploaded in youtube, but as free plan is valid for only 15 days, deployed the application using Vercel.`
 
 To run locally:
